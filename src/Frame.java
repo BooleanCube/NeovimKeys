@@ -71,7 +71,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
                 if(cursor.x == i/size && cursor.y == j/size) {
                     if(mode.equalsIgnoreCase("Normal")) g.setColor(Color.black);
                     else g.setColor(Color.green);
-                    g.fillRect(i-1, j-1, size-1, size-1);
+                    g.fillRect(i+1, j+1, size-1, size-1);
                     if(cursor.x == goal.x && cursor.y == goal.y) {
                         g.setColor(Color.white);
                         g.drawString(goal.text, i+7, j+16);
