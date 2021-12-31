@@ -7,7 +7,7 @@ Practice Using Neovim and Moving around with the Keys HJKL.
 3) Download the `.jar` file from the latest release
 4) You can drag and drop it from the Downloads folder to your Desktop (or store it anywhere on your PC, the Desktop is just for easy access)
 5) To run the application, you can simply just double click the icon with `NeovimKeys.jar`
-(if you are on Windows 10 it will give you a prompt asking how you want to run the application like below. Just select the first one that says `Java` and click `ok`)
+(if you are on Windows 10 it will give you a prompt asking how you want to run the application like below. Just select the first one that says `Java` and click `ok`) <br>
 ![image](https://user-images.githubusercontent.com/47650058/147600218-5d859509-a573-4766-8541-5598bcd001ab.png)
 6) It can also be run through the command line like this: `java -jar /path/to/jar/NeovimKeys.jar`
 
