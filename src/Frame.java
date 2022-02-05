@@ -1,6 +1,4 @@
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.text.DecimalFormat;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +21,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
     Node cursor = null, goal = null;
     String typeAttempt = "";
     String mode = "";
+    double averageTime = 0;
+    long startTime = 0;
+    long goalCounter = 0;
 
     public static void main(String[] args) {
         new Frame();
@@ -42,7 +44,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
         window = new JFrame();
         window.setContentPane(this);
         window.setTitle("Neovim Key Practice");
-        window.getContentPane().setPreferredSize(new Dimension(800, 700));
+        window.getContentPane().setPreferredSize(new Dimension(800+16, 800+16));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.pack();
         window.setLocationRelativeTo(null);
@@ -52,6 +54,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
         goal = new Node((int)(Math.random()*((this.getWidth()/size)-2)+1), (int)(Math.random()*((this.getHeight()/size)-2)+1), getRandomText());
         this.revalidate();
         this.repaint();
+        startTime = System.currentTimeMillis();
     }
 
     public void paintComponent(Graphics g) {
@@ -59,14 +62,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
         int height = getHeight();
         int width = getWidth();
         g.setColor(Color.lightGray);
-        for(int j = 0; j < this.getHeight(); j += size) {
-            for(int i = 0; i < this.getWidth(); i += size) {
+        for(int j = 0; j < this.getHeight()-2*size; j += size) {
+            for(int i = 0; i < this.getWidth()*size; i += size) {
                 g.drawRect(i, j, size, size);
                 if(goal != null && goal.x == i/size && goal.y == j/size) {
                     g.setColor(Color.blue);
                     g.fillRect(i+1, j+1, size-1, size-1);
                     g.setColor(Color.white);
-                    g.drawString(goal.text, i+7, j+16);
+                    g.drawString(goal.text, i+6, j+16);
                 }
                 if(cursor.x == i/size && cursor.y == j/size) {
                     if(mode.equalsIgnoreCase("Normal")) g.setColor(Color.black);
@@ -74,12 +77,18 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
                     g.fillRect(i+1, j+1, size-1, size-1);
                     if(cursor.x == goal.x && cursor.y == goal.y) {
                         g.setColor(Color.white);
-                        g.drawString(goal.text, i+7, j+16);
+                        g.drawString(goal.text, i+6, j+16);
                     }
                 }
                 g.setColor(Color.lightGray);
             }
         }
+        g.setColor(Color.black);
+        g.setFont(new Font("default", Font.BOLD, 20));
+        g.drawString(mode, 10, 820);
+        g.setFont(new Font("default", Font.BOLD, 16));
+        g.drawString(goalCounter == 1 ? goalCounter + " goal" : goalCounter + " goals", 400, 820);
+        g.drawString(averageTime == 1 ? "Average Time: " + String.format("%.2f", averageTime) + " second" : "Average Time: " + String.format("%.2f", averageTime) + " seconds", 610, 820);
     }
 
     @Override
@@ -133,18 +142,23 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
                     else typeAttempt = "";
                     if(typeAttempt.length() == 0 && currentChar == goal.text.charAt(0)) typeAttempt += currentChar;
                 }
-
+                if(!(cursor.x == goal.x && cursor.y == goal.y)) typeAttempt = "";
                 if(typeAttempt.length() == 2) {
                     goal = new Node((int)(Math.random()*((this.getWidth()/size))), (int)(Math.random()*((this.getHeight()/size))), getRandomText());
                     typeAttempt = "";
+                    ++goalCounter;
+                    double time = (System.currentTimeMillis()-startTime)/1000.0;
+                    if(averageTime == 0) averageTime = time;
+                    else { averageTime += time; averageTime /= 2; }
+                    startTime = System.currentTimeMillis();
                 }
             }
         }
 
         if(cursor.x < 0) cursor.x = 0;
-        if(cursor.x > this.getWidth()/size) cursor.x = this.getWidth()/size;
+        if(cursor.x > (getWidth()-size)/size) cursor.x--;
         if(cursor.y < 0) cursor.y = 0;
-        if(cursor.y > this.getWidth()/size) cursor.y = this.getHeight()/size;
+        if(cursor.y > (getHeight()-2*size)/size) cursor.y--;
 
         repaint();
     }
@@ -152,17 +166,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
     @Override
     public void keyReleased(KeyEvent e) {}
 
-    // Disabled this feature fornow
     @Override
     public void mouseWheelMoved(MouseWheelEvent m) {}
 
     @Override
     public void actionPerformed(ActionEvent e) {}
-
-    int randomWithRange(int min, int max) {
-        int range = (max - min) + 1;
-        return (int)(Math.random() * range) + min;
-    }
 
     String getRandomText() {
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
