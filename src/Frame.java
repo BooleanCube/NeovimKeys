@@ -44,7 +44,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
         window = new JFrame();
         window.setContentPane(this);
         window.setTitle("Neovim Key Practice");
-        window.getContentPane().setPreferredSize(new Dimension(800+16, 800+16));
+        window.getContentPane().setPreferredSize(new Dimension(800+50, 800+16));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.pack();
         window.setLocationRelativeTo(null);
@@ -90,7 +90,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
         g.drawString(goalCounter == 1 ? goalCounter + " goal" : goalCounter + " goals", 400, 800);
         g.drawString(
                 averageTime == 1 ? "Average Time: " + String.format("%.2f", averageTime) + " second" : "Average Time: " + String.format("%.2f", averageTime) + " seconds",
-                590, 800);
+                600, 800);
     }
 
     @Override
