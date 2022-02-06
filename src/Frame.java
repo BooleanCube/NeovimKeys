@@ -85,10 +85,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
         }
         g.setColor(Color.black);
         g.setFont(new Font("default", Font.BOLD, 20));
-        g.drawString(mode, 10, 820);
+        g.drawString(mode, 10, 800);
         g.setFont(new Font("default", Font.BOLD, 16));
-        g.drawString(goalCounter == 1 ? goalCounter + " goal" : goalCounter + " goals", 400, 820);
-        g.drawString(averageTime == 1 ? "Average Time: " + String.format("%.2f", averageTime) + " second" : "Average Time: " + String.format("%.2f", averageTime) + " seconds", 610, 820);
+        g.drawString(goalCounter == 1 ? goalCounter + " goal" : goalCounter + " goals", 400, 800);
+        g.drawString(
+                averageTime == 1 ? "Average Time: " + String.format("%.2f", averageTime) + " second" : "Average Time: " + String.format("%.2f", averageTime) + " seconds",
+                590, 800);
     }
 
     @Override
