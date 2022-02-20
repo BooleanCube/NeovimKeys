@@ -21,9 +21,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
     Node cursor = null, goal = null;
     String typeAttempt = "";
     String mode = "";
-    double averageTime = 0;
-    long startTime = 0;
     long goalCounter = 0;
+
+    boolean tempToggle = true;
+    double totalTime = 0d;
+    long tempStartTime = 0l;
 
     public static void main(String[] args) {
         new Frame();
@@ -54,7 +56,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
         goal = new Node((int)(Math.random()*((this.getWidth()/size)-2)+1), (int)(Math.random()*((this.getHeight()/size)-2)+1), getRandomText());
         this.revalidate();
         this.repaint();
-        startTime = System.currentTimeMillis();
     }
 
     public void paintComponent(Graphics g) {
@@ -88,6 +89,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
         g.drawString(mode, 10, 800);
         g.setFont(new Font("default", Font.BOLD, 16));
         g.drawString(goalCounter == 1 ? goalCounter + " goal" : goalCounter + " goals", 400, 800);
+        double averageTime = goalCounter == 0 ? totalTime : totalTime/goalCounter;
         g.drawString(
                 averageTime == 1 ? "Average Time: " + String.format("%.2f", averageTime) + " second" : "Average Time: " + String.format("%.2f", averageTime) + " seconds",
                 600, 800);
@@ -128,6 +130,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
                 else if(currentKey == KeyEvent.VK_J) cursor.y++;
                 else if(currentKey == KeyEvent.VK_K) cursor.y--;
                 else if(currentKey == KeyEvent.VK_L) cursor.x++;
+                else return;
+                if(tempToggle) {
+                    tempStartTime = System.currentTimeMillis();
+                    tempToggle = false;
+                }
             }
         }
 
@@ -135,9 +142,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
             if(currentKey == KeyEvent.VK_ESCAPE) mode = "Normal";
             else {
                 if(currentKey == KeyEvent.VK_LEFT) cursor.x--;
-                if(currentKey == KeyEvent.VK_DOWN) cursor.y++;
-                if(currentKey == KeyEvent.VK_UP) cursor.y--;
-                if(currentKey == KeyEvent.VK_RIGHT) cursor.x++;
+                else if(currentKey == KeyEvent.VK_DOWN) cursor.y++;
+                else if(currentKey == KeyEvent.VK_UP) cursor.y--;
+                else if(currentKey == KeyEvent.VK_RIGHT) cursor.x++;
                 else {
                     char currentChar = e.getKeyChar();
                     if(typeAttempt.length() == 1 && currentChar == goal.text.charAt(1)) typeAttempt += currentChar;
@@ -149,10 +156,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, Mous
                     goal = new Node((int)(Math.random()*((this.getWidth()/size))), (int)(Math.random()*((this.getHeight()/size))), getRandomText());
                     typeAttempt = "";
                     ++goalCounter;
-                    double time = (System.currentTimeMillis()-startTime)/1000.0;
-                    if(averageTime == 0) averageTime = time;
-                    else { averageTime += time; averageTime /= 2; }
-                    startTime = System.currentTimeMillis();
+                    totalTime += (System.currentTimeMillis()-tempStartTime)/1000.0;
+                    tempToggle = true;
                 }
             }
         }
