@@ -1,5 +1,9 @@
 # NeovimKeys
-Practice Using Neovim and Moving around with the Keys HJKL.
+> Practice Using Neovim and Moving around with the Keys HJKL.
+
+Using NeovimKeys for 10-20 minutes before using Neovim always helps. With enough practice every day, you should be able to use HJKL in neovim like a pro and be a lot more productive.
+
+This project is a work in progress and I will add a section to update your keybindings and also add more macros for you to be able to entirely simulate productive use of neovim/vim.
 
 ### Download Instructions:
 1) Download [Java](https://www.java.com/en/download/manual.jsp) to be able to run the `.jar` file.
