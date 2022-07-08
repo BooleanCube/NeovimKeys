@@ -17,10 +17,10 @@ This project is a work in progress and I will add a section to update your keybi
 
 ### Building Jar Instructions:
 1) Download the source code as a ZIP file and extract it into a folder.
-2) Go into the project directory and then cd into the `out/production/NeovimKeys/` directory to see all the compiled classes. Look for a class called `Frame.class`
-3) In the terminal, type the following command to build the jar file by yourself:
+2) Go into the project directory and then cd into the `out/production/NeovimKeys/` directory to see all the compiled classes.
+3) In the terminal, type the following command to build the jar file by yourself:<br>
 `jar -cvfm ../../artifacts/NeovimKeys.jar META-INF/MANIFEST.MF Frame.class Node.class style.class`
-4) The jar file will then build to `out/artifacts/` and can be easily ran by running the command `java -jar path/to/jar/NeovimKeys.jar`
+4) The jar file will then build to `out/artifacts/` and can be easily ran by running the command:<br>`java -jar path/to/jar/NeovimKeys.jar`
 
 ## Controls
 This works like how any ordinary Neovim would work. <br>
