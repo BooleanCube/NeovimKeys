@@ -15,6 +15,13 @@ This project is a work in progress and I will add a section to update your keybi
 ![image](https://user-images.githubusercontent.com/47650058/147600218-5d859509-a573-4766-8541-5598bcd001ab.png)
 6) It can also be run through the command line like this: `java -jar /path/to/jar/NeovimKeys.jar`
 
+### Building Jar Instructions:
+1) Download the source code as a ZIP file and extract it into a folder.
+2) Go into the project directory and then cd into the `out/production/NeovimKeys/` directory to see all the compiled classes. Look for a class called `Frame.class`
+3) In the terminal, type the following command to build the jar file by yourself:
+`jar -cvfm ../../artifacts/NeovimKeys.jar META-INF/MANIFEST.MF Frame.class Node.class style.class`
+4) The jar file will then build to `out/artifacts/` and can be easily ran by running the command `java -jar path/to/jar/NeovimKeys.jar`
+
 ## Controls
 This works like how any ordinary Neovim would work. <br>
 In `Normal` Mode (when the cursor is black), to move you use `HJKL` (H = left, J = down, K = up, L = right) <br>
