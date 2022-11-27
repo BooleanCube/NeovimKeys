@@ -40,7 +40,7 @@ The goal is to move to the blue node with text in the center and type whatever i
 **GOAL**: <br>
 ![image](https://user-images.githubusercontent.com/47650058/147601942-5b458039-b80a-4402-b0f8-4e959b0a6521.png)
 
-**IDICATORS**: <br>
+**INDICATORS**: <br>
 ![image](https://user-images.githubusercontent.com/47650058/152663451-de18fcee-c74f-4c9a-bbd0-58cee10cde62.png)
 
 *a project by BooleanCube :]*
