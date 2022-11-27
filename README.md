@@ -26,6 +26,7 @@ This project is a work in progress and I will add a section to update your keybi
 This works like how any ordinary Neovim would work. <br>
 In `Normal` Mode (when the cursor is black), to move you use `HJKL` (H = left, J = down, K = up, L = right) <br>
 In `Insert` Mode (when your cursor is green), you can type text and use `arrow keys` to move. <br>
+You can press `Escape` to switch from `Insert Mode` to `Normal Mode` and `i` to switch from `Normal Mode` to `Insert Mode` <br>
 The goal is to move to the blue node with text in the center and type whatever is in the node. After you do that, the blue node will reposition with new text. This will go in an endless cycle and you can practice until you feel fast.
 
 ![ezclap](https://user-images.githubusercontent.com/47650058/147601719-d6d4bda3-2fd7-46a3-851a-7e62726851ef.gif)
